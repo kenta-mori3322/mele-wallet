@@ -47,6 +47,18 @@ export default class AccountService extends MainService {
 		});
 	};
 
+	getKYC = async () => {
+		return await this.post({
+			path: `/kyc/initiate`,
+			data: {
+				Authorization: "Basic " +
+				base64.encode(
+					"c318b78e-ca58-42d4-bc3c-0fc713ca2ac9:wG4Jy1PzYMh5FT8vaGNpVIoNCeoAvPx4",
+				),
+			},
+		});
+	};
+
 	createAccount = async (
 		username: string,
 		name: string,
