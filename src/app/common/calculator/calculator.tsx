@@ -90,7 +90,7 @@ class CalculatorComponent extends React.Component<CalculatorProps> {
 									commonStyles.fontBold,
 								]}
 							>
-								MELC
+								MELX
 							</Text>
 							<Text style={[styles.coinRate]}>
 								${MeleCalculator.getMelCPrice(meleCoinPrice)}
