@@ -150,9 +150,9 @@ export default class AccountService extends MainService {
 		});
 	};
 
-	deleteUser = async (accountId: string) => {
+	deleteUser = async (email: string) => {
 		return await this.delete({
-			path: `/account/${accountId}`,
+			path: `/account/${email}`,
 		});
 	};
 }
