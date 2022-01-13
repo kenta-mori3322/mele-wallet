@@ -52,7 +52,7 @@ export default class AccountService extends MainService {
 		const kyc = cookies.get("kyc");
 		if (!kyc) {
 			return await this.post({
-				path: `/kyc/initiate`,
+				path: `/kyc/shuftipro/initiate`,
 				data: {
 					Authorization:
 						"Basic " +
