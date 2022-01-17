@@ -155,6 +155,16 @@ export default class AccountService extends MainService {
 			path: `/account/${email}`,
 		});
 	};
+
+	updateUser = async (email: string, newName: string, newEmail: string) => {
+		return await this.put({
+			path: `/account/${email}`,
+			data: {
+				name: newName,
+				email: newEmail,
+			},
+		});
+	};
 }
 
 export const accountService = new AccountService();
