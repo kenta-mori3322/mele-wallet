@@ -20,6 +20,7 @@ export interface ISearchTransactionParameter {
 	to?: string;
 	type?: TransactionType;
 	status?: TransactionStatus;
+	address?: string;
 }
 
 export default class TransactionService extends MainService {

@@ -106,6 +106,9 @@ function* searchTransactions(action: ITransactionReducerAction): SagaIterator {
 		if (action.to) {
 			p.to = action.to;
 		}
+		if (action.address) {
+			p.address = action.address;
+		}
 
 		const response = yield call(transactionService.searchTransactions, p);
 		return yield put({

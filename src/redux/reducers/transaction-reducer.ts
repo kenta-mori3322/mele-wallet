@@ -84,6 +84,7 @@ export interface ITransactionReducerAction {
 	to: string;
 	from: string;
 	amount: number;
+	address: string;
 }
 
 export const initialState: TransactionState = new TransactionState();
