@@ -58,6 +58,7 @@ function* processPurchase(action: ITransactionReducerAction): SagaIterator {
 		const response = yield call(
 			transactionService.transactionPurchase,
 			action.amount,
+			action.amountDetail,
 			action.generatedPurchaseCode,
 		);
 		return yield put({

@@ -3,8 +3,8 @@ import { Utils } from "mele-sdk";
 
 const ONE_CENT = new BN("10000000");
 const ONE_USD = new BN("1000000000");
-const MELC_PART = new BN("666666667");
-const MELG_PART = new BN("333333333");
+const MELX_FIXED_PART = new BN("666666667");
+const MELG_FIXED_PART = new BN("333333333");
 
 // const ONE_MELC = ONE_USD
 
@@ -29,7 +29,7 @@ export class MeleCalculator {
 	public static CentsToUSDMeleCPortionFormatted(cents: string) {
 		let centsBN = new BN(cents); // convert cents to BN
 		let centsExtended = centsBN.mul(ONE_CENT); // pad cents to 9 places
-		let melcUsd = centsExtended.mul(MELC_PART);
+		let melcUsd = centsExtended.mul(MELX_FIXED_PART);
 		let mecUsdDisplay = melcUsd.div(ONE_USD);
 		const usd = Utils.fromUmelc(mecUsdDisplay);
 		const fixedUSD = parseFloat(usd).toFixed(2);
@@ -39,21 +39,25 @@ export class MeleCalculator {
 	public static CentsToUSDMeleGPortionFormatted(cents: string) {
 		let centsBN = new BN(cents); // convert cents to BN
 		let centsExtended = centsBN.mul(ONE_CENT); // pad cents to 9 places
-		let melcUsd = centsExtended.mul(MELG_PART);
+		let melcUsd = centsExtended.mul(MELG_FIXED_PART);
 		let mecUsdDisplay = melcUsd.div(ONE_USD);
 		const usd = Utils.fromUmelc(mecUsdDisplay);
 		const fixedUSD = parseFloat(usd).toFixed(2);
 		return MeleCalculator.formatNumber(fixedUSD);
 	}
 
-	public static CentsToMeleC(cents: string, melcPrice: string): string {
+	public static CentsToMeleC(
+		cents: string,
+		melcPrice: string,
+		part?: BN,
+	): string {
 		if (cents.length >= 13) {
 			// We don't support amounts greater than 100B$
 			return "0";
 		}
 		let centsBN = new BN(cents); // convert cents to BN
 		let centsExtended = centsBN.mul(ONE_CENT); // pad cents to 9 places
-		let melcUsd = centsExtended.mul(MELC_PART);
+		let melcUsd = centsExtended.mul(part ? part : MELX_FIXED_PART);
 		return Utils.fromUmelc(melcUsd.div(new BN(melcPrice))).toString();
 	}
 
@@ -61,6 +65,7 @@ export class MeleCalculator {
 		cents: string,
 		p_melgPerGramOfGold: string,
 		p_priceOfGoldPerGram: string,
+		part?: BN,
 	): string {
 		if (cents.length >= 13) {
 			// We don't support amounts greater than 100B$
@@ -68,7 +73,9 @@ export class MeleCalculator {
 		}
 		const centsBN = new BN(cents); // convert cents to BN
 		const centsExtended = centsBN.mul(ONE_CENT);
-		const melgCents = centsExtended.mul(MELG_PART);
+		const melgCents = centsExtended.mul(
+			part !== undefined ? part : MELG_FIXED_PART,
+		);
 		const gramsOfGold = melgCents
 			.mul(new BN(p_melgPerGramOfGold))
 			.div(new BN(p_priceOfGoldPerGram || "1"));
@@ -79,9 +86,10 @@ export class MeleCalculator {
 		cents: string,
 		meleCPrice: string,
 		decimals: number = 9,
+		part?: BN,
 	) {
 		return MeleCalculator.formatNumber(
-			MeleCalculator.CentsToMeleC(cents, meleCPrice),
+			MeleCalculator.CentsToMeleC(cents, meleCPrice, part),
 			decimals,
 		);
 	}
@@ -90,12 +98,14 @@ export class MeleCalculator {
 		p_melgPerGramOfGold: string,
 		p_priceOfGoldPerGram: string,
 		decimals: number = 9,
+		part?: BN,
 	) {
 		return MeleCalculator.formatNumber(
 			MeleCalculator.CentsToMeleG(
 				cents,
 				p_melgPerGramOfGold,
 				p_priceOfGoldPerGram,
+				part,
 			),
 			decimals,
 		);

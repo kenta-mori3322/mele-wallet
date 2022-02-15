@@ -165,6 +165,16 @@ export default class AccountService extends MainService {
 			},
 		});
 	};
+
+	resendVerificationEmail = async (language: string) => {
+		console.log("here", language);
+		return await this.post({
+			path: `/send-verification-email`,
+			data: {
+				currentLanguage: language,
+			},
+		});
+	};
 }
 
 export const accountService = new AccountService();

@@ -35,12 +35,17 @@ export default class TransactionService extends MainService {
 		});
 		return response;
 	};
-	transactionPurchase = async (amount: number, refCode: string) => {
+	transactionPurchase = async (
+		amount: number,
+		amountDetail: string,
+		refCode: string,
+	) => {
 		return await this.put({
 			path: `/transaction`,
 			data: {
 				type: "purchase",
 				amount: parseInt(amount as any),
+				amountDetail: amountDetail,
 				refCode: refCode,
 			},
 		});

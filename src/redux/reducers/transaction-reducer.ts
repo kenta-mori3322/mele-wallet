@@ -84,6 +84,7 @@ export interface ITransactionReducerAction {
 	to: string;
 	from: string;
 	amount: number;
+	amountDetail: string;
 	address: string;
 }
 
