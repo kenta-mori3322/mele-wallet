@@ -1,5 +1,6 @@
 import MainService from "./main-api-service";
 import buildUrl from "build-url";
+import AsyncStorage from "@react-native-community/async-storage";
 // used by admin to manipulate user data
 export enum TransactionType {
 	TRANSFER = "transfer",
@@ -19,6 +20,7 @@ export interface ISearchTransactionParameter {
 	to?: string;
 	type?: TransactionType;
 	status?: TransactionStatus;
+	address?: string;
 }
 
 export default class TransactionService extends MainService {
@@ -33,12 +35,17 @@ export default class TransactionService extends MainService {
 		});
 		return response;
 	};
-	transactionPurchase = async (amount: number, refCode: string) => {
+	transactionPurchase = async (
+		amount: number,
+		amountDetail: string,
+		refCode: string,
+	) => {
 		return await this.put({
 			path: `/transaction`,
 			data: {
 				type: "purchase",
 				amount: parseInt(amount as any),
+				amountDetail: amountDetail,
 				refCode: refCode,
 			},
 		});
@@ -64,9 +71,10 @@ export default class TransactionService extends MainService {
 				...(p as any),
 			},
 		});
-		return await this.get({
+		const response = await this.get({
 			path: url,
 		});
+		return response;
 	};
 	getNewTransactionNumber = async () => {
 		return await this.get({
@@ -74,4 +82,5 @@ export default class TransactionService extends MainService {
 		});
 	};
 }
+
 export const transactionService = new TransactionService();

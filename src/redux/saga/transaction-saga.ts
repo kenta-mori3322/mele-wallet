@@ -8,7 +8,12 @@ import { SagaIterator } from "redux-saga";
 import {
 	TransactionStateActionTypes,
 	ITransactionReducerAction,
+	LoadTransactionsStatus,
+	TransactionState,
+	ITransactionList,
 } from "@mele-wallet/redux/reducers/transaction-reducer";
+import AsyncStorage from "@react-native-community/async-storage";
+import { ITransactionModel } from "@mele-wallet/common/model/transaction.model";
 
 export const transactionSaga = function* handleMessage(
 	params: any,
@@ -53,6 +58,7 @@ function* processPurchase(action: ITransactionReducerAction): SagaIterator {
 		const response = yield call(
 			transactionService.transactionPurchase,
 			action.amount,
+			action.amountDetail,
 			action.generatedPurchaseCode,
 		);
 		return yield put({
@@ -100,6 +106,9 @@ function* searchTransactions(action: ITransactionReducerAction): SagaIterator {
 		}
 		if (action.to) {
 			p.to = action.to;
+		}
+		if (action.address) {
+			p.address = action.address;
 		}
 
 		const response = yield call(transactionService.searchTransactions, p);

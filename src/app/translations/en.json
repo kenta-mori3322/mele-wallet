@@ -3,7 +3,7 @@
 		"balance": "Balance",
 		"loading": "Loading home...",
 		"balancetitle": "The new gold standard blockchain",
-		"balanceDesc": "Cryptocurrency just got a major upgrade. Mele is the new gold-backed, delegated proof of stake blockchain. Giving you all the security of solid gold, with all the freedom of cryptocurrency. \nIt works as a two coin model. MELC is the coin that has all the action, acting as the platform reward and payment token. While MELG is the safe and steady gold-backed stable coin. \nTogether, the new blockchain gold standard is born."
+		"balanceDesc": "Cryptocurrency just got a major upgrade. Mele is the new gold-backed, delegated proof of stake blockchain. Giving you all the security of solid gold, with all the freedom of cryptocurrency. \nIt works as a two coin model. MELX is the coin that has all the action, acting as the platform reward and payment token. While MELG is the safe and steady gold-backed stable coin. \nTogether, the new blockchain gold standard is born."
 	},
 	"actions": {
 		"title": "Actions",
@@ -128,6 +128,6 @@
 	},
 	"calculator": {
 		"title": "Your balance, explained",
-		"description": "Mele is a two-coin blockchain model. \nMELG is a gold-backed stable coin. \nMELC is a reward and payment token. \nWhen you buy coins you are buying an allocation of MELC and MELG at a ratio of 2:1."
+		"description": "Mele is a two-coin blockchain model. \nMELG is a gold-backed stable coin. \nMELX is a reward and payment token. \nWhen you buy coins you are buying an allocation of MELX and MELG at a ratio of 2:1."
 	}
 }

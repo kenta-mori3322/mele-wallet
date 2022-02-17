@@ -1,6 +1,7 @@
 import MainService from "./main-api-service";
 import base64 from "base-64";
 import Cookies from "universal-cookie";
+import AsyncStorage from "@react-native-community/async-storage";
 export default class AccountService extends MainService {
 	walletSync = async (accountId: string, wallet: string) => {
 		return await this.patch({
@@ -21,9 +22,10 @@ export default class AccountService extends MainService {
 	};
 
 	checkSession = async () => {
-		return await this.get({
+		const response = await this.get({
 			path: "/account",
 		});
+		return response;
 	};
 
 	logout = async () => {
@@ -43,6 +45,23 @@ export default class AccountService extends MainService {
 				password: password,
 			},
 		});
+	};
+
+	getKYC = async () => {
+		const cookies = new Cookies();
+		const kyc = cookies.get("kyc");
+		if (!kyc) {
+			return await this.post({
+				path: `/kyc/shuftipro/initiate`,
+				data: {
+					Authorization:
+						"Basic " +
+						base64.encode(
+							"c318b78e-ca58-42d4-bc3c-0fc713ca2ac9:wG4Jy1PzYMh5FT8vaGNpVIoNCeoAvPx4",
+						),
+				},
+			});
+		}
 	};
 
 	createAccount = async (
@@ -130,5 +149,32 @@ export default class AccountService extends MainService {
 			},
 		});
 	};
+
+	deleteUser = async (email: string) => {
+		return await this.delete({
+			path: `/account/${email}`,
+		});
+	};
+
+	updateUser = async (email: string, newName: string, newEmail: string) => {
+		return await this.put({
+			path: `/account/${email}`,
+			data: {
+				name: newName,
+				email: newEmail,
+			},
+		});
+	};
+
+	resendVerificationEmail = async (language: string) => {
+		console.log("here", language);
+		return await this.post({
+			path: `/send-verification-email`,
+			data: {
+				currentLanguage: language,
+			},
+		});
+	};
 }
+
 export const accountService = new AccountService();

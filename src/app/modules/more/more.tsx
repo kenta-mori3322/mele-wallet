@@ -185,7 +185,7 @@ class MoreComponent extends Component<IMoreComponentProps> {
 							<InfoIcon style={[styles.actionLogo]} />
 						</View>
 						<Text style={[styles.actionText, commonStyles.fontBook]}>
-							About MELC
+							About MELX
 						</Text>
 						<Ripple style={[styles.transparentButton]}
 							onPress={() => {

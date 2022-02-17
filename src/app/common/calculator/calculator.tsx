@@ -55,10 +55,10 @@ class CalculatorComponent extends React.Component<CalculatorProps> {
 					meleCoinPrice,
 				);
 
-				priceOfGoldPerGram = this.props.statisticsState.staticInfo!
-					.priceOfGoldPerGram;
-				melgPerGramOfGold = this.props.statisticsState.staticInfo!
-					.melgPerGramOfGold;
+				priceOfGoldPerGram =
+					this.props.statisticsState.staticInfo!.priceOfGoldPerGram;
+				melgPerGramOfGold =
+					this.props.statisticsState.staticInfo!.melgPerGramOfGold;
 				meleGold = MeleCalculator.CentsToMeleGFormatted(
 					this.props.centsAmount,
 					melgPerGramOfGold,
@@ -90,7 +90,7 @@ class CalculatorComponent extends React.Component<CalculatorProps> {
 									commonStyles.fontBold,
 								]}
 							>
-								MELC
+								MELX
 							</Text>
 							<Text style={[styles.coinRate]}>
 								${MeleCalculator.getMelCPrice(meleCoinPrice)}
