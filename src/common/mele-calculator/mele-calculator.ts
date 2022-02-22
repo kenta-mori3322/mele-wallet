@@ -26,6 +26,14 @@ export class MeleCalculator {
 		return Utils.fromUmelc(melcPrice);
 	}
 
+	public static MelXtoUSD(melx: string) {
+		return parseFloat(melx) * 0.37037;
+	}
+
+	public static MelGtoUSD(melg: string) {
+		return parseFloat(melg) * 6.157;
+	}
+
 	public static CentsToUSDMeleCPortionFormatted(cents: string) {
 		let centsBN = new BN(cents); // convert cents to BN
 		let centsExtended = centsBN.mul(ONE_CENT); // pad cents to 9 places
