@@ -14,6 +14,10 @@ export interface ITransactionModel {
 	toAccountId: string;
 	type: string;
 	amount: string;
+	amountDetail: {
+		MELX: number;
+		MELG: number;
+	};
 	createdAt: string;
 	approvedAt: string;
 	updatedAt: string;
@@ -38,6 +42,10 @@ export function emptyTransaction(): ITransactionModel {
 		toAccountId: "",
 		type: "",
 		amount: "",
+		amountDetail: {
+			MELG: 0,
+			MELX: 0,
+		},
 		createdAt: "",
 		approvedAt: "",
 		updatedAt: "",
